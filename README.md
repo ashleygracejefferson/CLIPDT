@@ -2,10 +2,10 @@
 
 Welcome to CLIPDT.com! 
 
-First you will need to savethe files locally <br/>
-        - Hit Code <br/>
-        - Then open with GitHub Desktop <br/>
-        - From there, you will be able to save to your desired file path <br/>
+First you will need to save the files locally <br/>
+          - Hit Code <br/>
+         - Then open with GitHub Desktop <br/>
+         - From there, you will be able to save to your desired file path <br/>
 
 From there, open your Terminal or a tool you use to run your code locally <br/>
         - Access your file and make sure you have Python installed <br/>
