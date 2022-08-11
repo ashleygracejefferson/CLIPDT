@@ -6,3 +6,40 @@ import requests
 from datetime import datetime
 from dateutil import relativedelta
 import string
+
+api_key = "mQynWWyFXjMp01seJaNaVMj56YY1cSiv"
+output_data =  []
+#If you want a range of dates... needs a little work
+#start_date = "01/2020"
+#end_date = "05/2021"
+date = ["2020", "9"]
+#keyword = ""
+
+def get_raw_data(date):
+    api_url = "https://api.nytimes.com/svc/archive/v1/"+date[0]+"/"+date[1]+".json?api-key="+api_key
+    all_articles = requests.get(api_url).json()
+    time.sleep(10)  #there is a query frequency limit
+    return all_articles["response"]["docs"]
+
+
+
+def get_sections(articles):
+    sectionNames = []
+    for article in articles:
+        if article["section_name"] not in sectionNames:
+            sectionNames.append(article["section_name"])
+    return sectionNames
+
+
+def filter_articles(section,articles):
+    for a in articles:
+        if a["section_name"] == section:
+            a_subset = {key: a[key] for key in ["headline","web_url","section_name"]}
+            output_data.append(a_subset)
+        else:
+            pass
+        #If you want to add a keyword
+        #elif keyword in a["headline"]["main"]:
+        #    a_subset = {key: a[key] for key in ["headline","web_url","section_name"]}
+        #    output_data.append(a)
+    return output_data
