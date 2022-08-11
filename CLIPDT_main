@@ -18,6 +18,7 @@ date = ["2020", "9"]
 def get_raw_data(date):
     api_url = "https://api.nytimes.com/svc/archive/v1/"+date[0]+"/"+date[1]+".json?api-key="+api_key
     all_articles = requests.get(api_url).json()
+    print("Loading articles...")
     time.sleep(10)  #there is a query frequency limit
     return all_articles["response"]["docs"]
 
