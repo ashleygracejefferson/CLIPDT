@@ -43,3 +43,4 @@ def filter_articles(section,articles):
         #    a_subset = {key: a[key] for key in ["headline","web_url","section_name"]}
         #    output_data.append(a)
     return output_data
+
