@@ -1,4 +1,4 @@
-# CLIPTD
+# CLIPDT
 
 
 First, enter a Month using a numerical value (1 through 12).
