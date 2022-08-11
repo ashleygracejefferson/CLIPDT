@@ -47,6 +47,125 @@ def filter_articles(section,articles):
 
 
 
+#If you want a range of dates... needs a little work
+#start_date = "01/2020"
+#end_date = "05/2021"
+date = ["2020", "9"]
+#keyword = ""
+
+def get_raw_data(date):
+    api_url = "https://api.nytimes.com/svc/archive/v1/"+date[0]+"/"+date[1]+".json?api-key="+api_key
+    all_articles = requests.get(api_url).json()
+    time.sleep(10)  #there is a query frequency limit
+    return all_articles["response"]["docs"]
+
+
+
+def get_sections(articles):
+    sectionNames = []
+    for article in articles:
+        if article["section_name"] not in sectionNames:
+            sectionNames.append(article["section_name"])
+    return sectionNames
+
+
+def filter_articles(section,articles):
+    for a in articles:
+        if a["section_name"] == section:
+            a_subset = {key: a[key] for key in ["headline","web_url","section_name"]}
+            output_data.append(a_subset)
+        else:
+            pass
+        #If you want to add a keyword
+        #elif keyword in a["headline"]["main"]:
+        #    a_subset = {key: a[key] for key in ["headline","web_url","section_name"]}
+        #    output_data.append(a)
+    return output_data
+
+#For a range of dates, requires a little work
+#def date_input_list(start_date, end_date):
+#    delta = relativedelta.relativedelta(datetime.strptime(end_date, "%m/%Y"), datetime.strptime(start_date, "%m/%Y"))
+#    print(delta.months+(delta.years * 12))
+#    print(datetime.strptime(end_date, "%m/%Y"))
+
+
+        
+def get_all_articles(date):
+    #date_list = date_input_list(date_range)
+    #for date in date_list:
+    all = get_raw_data(date)
+    #parsed_data = parse_by_section(section,all)
+    #if not parsed_data: print("No articles found in current section")
+    #print(len(parsed_data))
+    return all
+
+print("~~~Welcome to CLIPDT~~~")
+print("---------------------------------")
+
+print(" WWWW.CLIPDT.COM ")
+
+print("---------------------------------")
+
+
+
+
+
+
+month=input("Please enter month (1-12): ")
+
+print("---------------------------------")
+
+year= input("Please enter year (1981 - present): ")
+date= [year,month]
+print("---------------------------------")
+
+print("Sections for",year,"are:")
+articles = get_all_articles(date)
+
+
+sections = get_sections(articles)
+
+for sect in sections:
+  print(sect)
+
+print("---------------------------------")
+
+#date = input("Please enter the month and year of article: ")
+section = string.capwords(input("Please enter NYT section:"))
+#date_input_list(start_date, end_date)
+
+articles = filter_articles(section, articles)
+
+
+for a in articles: 
+  print(a["headline"]["main"] , a["web_url"])
+
+
+print("---------------------------------")
+
+
+
+#function we used to find what year and month the sections started in
+
+# years=range(1980, 1982, 1)
+# months=range(1,12)
+
+# for year in years:
+#   for month in months:
+#     date = [str(year), str(month)]
+#     arts = get_all_articles(date)
+
+#     sections = get_sections(arts)
+#     if(len(sections) > 0):
+#       print(date ,sections)
+
+    
+
+
+
+
+
+
 
     
 
